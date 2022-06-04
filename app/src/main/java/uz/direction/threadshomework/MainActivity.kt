@@ -38,7 +38,9 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 changeTextViewText(binding.btnShuffle, "START THE RACE")
-
+                for(i in 0 until progressBar.size){
+                    progressBar[i].progress = 0
+                }
                 compositeDisposable.clear()
                 stateChecker = false
             }
