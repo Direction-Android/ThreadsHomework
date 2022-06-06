@@ -11,12 +11,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class Service {
 
-    fun getObserver(): Observable<Int> = Observable.create<Int> { emitter ->
-        val freq = (50..150).random().toLong()
+    fun getObserver(): Observable<Progress> = Observable.create<Progress> { emitter ->
+        val freq = 150
         val finish = (1..100).random()
+        val progress = Progress(0, finish)
+
         for (i in 0 until finish) {
-            SystemClock.sleep(freq)
-            emitter.onNext(i)
+            SystemClock.sleep(freq.toLong())
+            progress.progress = i
+            emitter.onNext(progress)
         }
     }
         .observeOn(AndroidSchedulers.mainThread())
